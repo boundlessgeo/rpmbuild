@@ -1,7 +1,7 @@
 # Define Constants
 %define name geoshape
 %define version 1.7.11
-%define release 1%{?dist}
+%define release 2%{?dist}
 %define geonode_clone_version 1.4
 %define _unpackaged_files_terminate_build 0
 %define __os_install_post %{nil}
@@ -231,5 +231,7 @@ fi
 %doc ../SOURCES/license/GNU
 
 %changelog
+* Wed Feb 17 2016 amirahav <arahav@boundlessgeo.com> [1.7.11-2]
+- Disable HTTPS
 * Sat Feb 13 2016 amirahav <arahav@boundlessgeo.com> [1.7.11-1]
 - CentOS7 support
