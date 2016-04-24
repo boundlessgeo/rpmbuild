@@ -5,7 +5,7 @@
 
 Summary:        Geographic Information Systems Extensions to PostgreSQL
 Name:           postgis
-Version:        2.2.1
+Version:        2.2.2
 Release:        1%{?dist}
 License:        GPL v2
 Group:          Applications/Databases
@@ -164,7 +164,9 @@ rm -rf %{buildroot}
 #%{pgdir}/bin/shp2pgsql-gui
 
 %changelog
-* Sat Jan 16 2016 amirahav <arahav@boundlessgeo.com> [1.7.11-3]
+* Sun Apr 24 2016 amirahav <arahav@boundlessgeo.com> [2.2.2-1]
+- Updated to 2.2.2
+* Sat Jan 16 2016 amirahav <arahav@boundlessgeo.com> [2.2.1-1]
 - Upgrade PostgreSQL to 9.5
 - Upgrade PostGIS to 2.2.1
 * Wed Nov 25 2015 Boundless Spatial, Inc <contact@boundlessgeo.com> - 2.1.8

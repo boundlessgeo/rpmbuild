@@ -1,5 +1,5 @@
 %define name python27-virtualenv
-%define version 13.1.0
+%define version 15.0.1
 %define release 1%{?dist}
 %define _rpmfilename %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm
 
@@ -39,5 +39,7 @@ A tool to create isolated Python environments.
 %defattr(-,root,root)
 
 %changelog
+* Sun Apr 24 2016 amirahav <arahav@boundlessgeo.com> [15.0.1-1]
+- Updated to 15.0.1
 * Tue Dec 08 2015 BerryDaniel <dberry@boundlessgeo.com> [13.1.0-1]
 - Updated to 13.1.0

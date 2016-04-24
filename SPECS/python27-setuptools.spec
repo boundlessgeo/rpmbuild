@@ -1,5 +1,5 @@
 %define name python27-setuptools
-%define version 18.7.1
+%define version 20.9.0
 %define realname setuptools
 %define release 1%{?dist}
 %define _rpmfilename %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm
@@ -47,5 +47,7 @@ rm -fr $RPM_BUILD_ROOT
 %defattr(-,root,root)
 
 %changelog
+* Sun Apr 24 2016 amirahav <arahav@boundlessgeo.com> [20.9.0-1]
+- Updated to 20.9.0
 * Thu Dec 03 2015 BerryDaniel <dberry@boundlessgeo.com> [18.7.1-1]
 - Updated to 18.7.1

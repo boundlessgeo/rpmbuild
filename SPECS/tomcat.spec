@@ -8,7 +8,7 @@
 
 Summary:    Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
 Name:       tomcat8
-Version:    8.0.32
+Version:    8.0.33
 Release:    1
 License:    Apache Software License
 Group:      Networking/Daemons
@@ -198,5 +198,7 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Sun Apr 24 2016 amirahav <arahav@boundlessgeo.com> [8.0.33-1]
+- Updated to 8.0.33
 * Tue Jan 19 2016 amirahav <arahav@boundlessgeo.com>
 - 8.0.30

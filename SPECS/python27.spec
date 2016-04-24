@@ -8,9 +8,9 @@
 
 #  Define Constants
 %define name python27
-%define version 2.7.10
+%define version 2.7.11
 %define libvers 2.7
-%define release 2%{?dist}
+%define release 1%{?dist}
 %define __prefix /usr/local
 %define _unpackaged_files_terminate_build 0
 %define debug_package %{nil}
@@ -170,6 +170,8 @@ formats.
 %endif
 
 %changelog
+* Sun Apr 24 2016 amirahav <arahav@boundlessgeo.com> [2.7.11-1]
+- Updated to 2.7.11
 * Mon Dec 02 2015 BerryDaniel <dberry@boundlessgeo.com> [2.7.10-2]
 - Added tk-devel to BuildRequires
 
