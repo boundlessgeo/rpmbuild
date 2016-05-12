@@ -6,7 +6,7 @@
 Summary:        Geographic Information Systems Extensions to PostgreSQL
 Name:           postgis
 Version:        2.2.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPL v2
 Group:          Applications/Databases
 Source:         http://download.osgeo.org/postgis/source/postgis-%{version}.tar.gz
