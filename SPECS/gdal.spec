@@ -1,7 +1,7 @@
 Summary: Geospatial Data Abstraction Library
 Name: gdal
 Version: 2.1.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: MIT/X
 Group: Applications/Engineering
 URL: http://www.gdal.org/
@@ -40,6 +40,7 @@ Requires: sqlite
 Requires: xerces-c
 Requires: libkml
 Requires: openjpeg2
+Requires: proj-devel
 
 Patch0: gdal_driverpath.patch
 Patch1: gdal_GDALmake.opt.in.patch
@@ -58,10 +59,18 @@ Summary: Header files, libraries and development documentation for %{name}.
 Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
+%package python
+Summary: Python bindings for gdal and ogr
+Group: System Environment/Libraries
+Requires: %{name} = %{version}-%{release}
+
 %description devel
 This package contains the header files, static libraries and development
 documentation for %{name}. If you like to develop programs using %{name},
 you will need to install %{name}-devel.
+
+%description python
+This package contains Python bindings for GDAL/OGR library.
 
 %files devel
 %defattr(-, root, root, 0755)
@@ -86,7 +95,7 @@ tar -xf %{SOURCE1} -C .
 /bin/cp -rf %{_builddir}/%{name}-%{version}/%{mrsid_name}/Raster_DSDK/lib/* /usr/local/lib
 /bin/cp -rf %{_builddir}/%{name}-%{version}/%{mrsid_name}/Raster_DSDK/include/* /usr/local/include
 
-%configure --datadir=/usr/share/gdal --disable-static --with-pg=/usr/pgsql-9.5/bin/pg_config --disable-rpath --with-mrsid=/usr/local  --with-mrsid_lidar=/usr/local 
+%configure --datadir=/usr/share/gdal --disable-static --with-pg=/usr/pgsql-9.5/bin/pg_config --disable-rpath --with-mrsid=/usr/local  --with-mrsid_lidar=/usr/local --with-spatialite --with-curl --with-expat --with-python --with-java
 
 make
 make %{?_smp_mflags}
@@ -129,7 +138,15 @@ rm -f /usr/local/lib/{libgeos*,libltidsdk*,libtbb*,liblti_lidar_dsdk*,liblaslib.
 %{_libdir}/gdal-%{version}.jar
 %{_libdir}/pkgconfig/gdal.pc
 
+%files python
+%defattr(-,root,root,-)
+%{python_sitearch}
+%{_bindir}/*.py
+
 %changelog
+* Tue Jul 5 2016 amirahav <arahav@boundlessgeo.com> [2.1.0-2]
+- Add python support
+- require proj-devel because proj is missing libproj.so
 * Wed May 11 2016 amirahav <arahav@boundlessgeo.com> [2.1.0-1]
 - Upgraded to GDAL 2.1.0
 * Fri Feb 5 2016 amirahav <arahav@boundlessgeo.com> [2.0.2-1]
