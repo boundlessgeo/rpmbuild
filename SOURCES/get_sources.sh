@@ -12,10 +12,10 @@ srcs+=("https://s3.amazonaws.com/boundlessps-public/geoshape/src/lcms2-2.7.tar.g
 srcs+=("https://s3.amazonaws.com/boundlessps-public/geoshape/src/openjpeg-2.1.0.tar.gz")
 srcs+=("https://s3.amazonaws.com/boundlessps-public/geoshape/src/gdal-2.1.0.tar.gz")
 srcs+=("https://s3.amazonaws.com/boundlessps-public/geoshape/src/postgis-2.2.2.tar.gz")
-srcs+=("https://s3.amazonaws.com/boundlessps-public/geoshape/src/apache-tomcat-8.5.3.tar.gz")
+srcs+=("https://s3.amazonaws.com/boundlessps-public/geoshape/src/apache-tomcat-8.5.4.tar.gz")
 srcs+=("https://s3.amazonaws.com/boundlessps-public/geoshape/src/mod_xsendfile-0.12.tar.bz2")
-srcs+=("https://s3.amazonaws.com/boundlessps-public/geoshape/src/geoserver/2.8/geoserver.war")
-srcs+=("https://s3.amazonaws.com/boundlessps-public/geoshape/src/geoserver_data-geogig_od3.zip")
+srcs+=("https://s3.amazonaws.com/boundlessps-public/geoshape/src/geoserver/2.9/geoserver.war")
+srcs+=("https://s3.amazonaws.com/boundlessps-public/geoshape/src/geoserver/2.9/data-dir.zip")
 
 if [ $version == 7 ];then
   srcs+=("https://s3.amazonaws.com/boundlessps-public/geoshape/src/MrSID_DSDK-9.5.1.4427-linux.x86-64.gcc48.tar.gz")
