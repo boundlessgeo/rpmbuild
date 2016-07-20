@@ -29,8 +29,8 @@ with certain JSON, REST, and security capabilites specifically for GeoSHAPE.
 %prep
 [ -d $RPM_SOURCE_DIR/geoserver ] && rm -rf $RPM_SOURCE_DIR/geoserver
 [ -d $RPM_SOURCE_DIR/data ] && rm -rf $RPM_SOURCE_DIR/data
-unzip $RPM_SOURCE_DIR/%{SOURCE0} -d $RPM_SOURCE_DIR/geoserver
-unzip $RPM_SOURCE_DIR/%{SOURCE1} -d $RPM_SOURCE_DIR/data
+unzip %{SOURCE0} -d $RPM_SOURCE_DIR/geoserver
+unzip %{SOURCE1} -d $RPM_SOURCE_DIR/data
 pushd $RPM_SOURCE_DIR/geoserver
 
 %patch0 -p1
@@ -45,6 +45,7 @@ GS=$RPM_SOURCE_DIR/geoserver
 DATA=$RPM_BUILD_ROOT/opt/boundless/exchange/geoserver_data/geoserver_data
 GEOSHAPE_DATA=$RPM_SOURCE_DIR/data
 mkdir -p $WEBAPPS
+mkdir -p $DATA
 cp -rp $GS $WEBAPPS
 if [ ! -d $DATA ]; then
   mkdir -p $DATA
