@@ -16,6 +16,7 @@ License:       GPLv2
 BuildRequires: unzip
 Requires:      tomcat8
 Conflicts:     geoserver
+Conflicts:     suite-geoserver
 Source0:     geoserver.war
 Source1:     data-dir.zip
 Source2:     geogig.config
@@ -42,15 +43,14 @@ popd
 %install
 WEBAPPS=$RPM_BUILD_ROOT%{_localstatedir}/lib/tomcat8/webapps
 GS=$RPM_SOURCE_DIR/geoserver
-DATA=$RPM_BUILD_ROOT/opt/boundless/exchange/geoserver_data/geoserver_data
+GS_DATA_DIR=/opt/boundless/exchange/geoserver_data
+DATA=$RPM_BUILD_ROOT$GS_DATA_DIR
 GEOSHAPE_DATA=$RPM_SOURCE_DIR/data
 mkdir -p $WEBAPPS
 mkdir -p $DATA
+cp -R $GEOSHAPE_DATA/* $DATA
 cp -rp $GS $WEBAPPS
-if [ ! -d $DATA ]; then
-  mkdir -p $DATA
-  cp -R $GEOSHAPE_DATA/* $DATA
-fi
+
 #sed -i.bak "s|http://localhost|https://localhost|g" $DATA/security/auth/geonodeAuthProvider/config.xml
 mkdir -p $DATA/geogig
 install -m 644 %{SOURCE2} $DATA/geogig/.geogigconfig
@@ -61,7 +61,7 @@ install -m 644 %{SOURCE2} $DATA/geogig/.geogigconfig
 if [ $1 -eq 1 ] ; then
   # add Java specific options
   echo '# Next line added for geonode service' >> %{_sysconfdir}/sysconfig/tomcat8
-  echo 'JAVA_OPTS="-Djava.awt.headless=true -Xms256m -Xmx1024m -Xrs -XX:PerfDataSamplingInterval=500 -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:SoftRefLRUPolicyMSPerMB=36000 -Duser.home=/opt/boundless/exchange/geoserver_data/geogig"' >> %{_sysconfdir}/sysconfig/tomcat8
+  echo 'JAVA_OPTS="-Djava.awt.headless=true -Xms256m -Xmx1536m -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:SoftRefLRUPolicyMSPerMB=36000 -Duser.home=/opt/boundless/exchange/geoserver_data/geogig"' >> %{_sysconfdir}/sysconfig/tomcat8
 fi
 
 %preun
@@ -81,9 +81,9 @@ fi
 [ -d $RPM_SOURCE_DIR/data ] && rm -rf $RPM_SOURCE_DIR/data
 
 %files
-%defattr(-,root,root,-)
-%attr(-,tomcat,tomcat) %{_localstatedir}/lib/tomcat8/webapps/geoserver
-%attr(775,tomcat,tomcat) /opt/boundless/exchange/geoserver_data/geoserver_data
+%defattr(644, tomcat, tomcat, 755)
+%{_localstatedir}/lib/tomcat8/webapps/geoserver
+/opt/boundless/exchange/geoserver_data
 
 %changelog
 * Wed Jul 20 2016 amirahav <arahav@boundlessgeo.com> [2.9-1]
