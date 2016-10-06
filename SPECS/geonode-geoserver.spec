@@ -2,7 +2,7 @@
 %define name geonode-geoserver
 %define realname geoserver
 %define version 2.9
-%define release 2
+%define release 3
 %define _unpackaged_files_terminate_build 0
 %define __os_install_post %{nil}
 %define _rpmfilename %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm
