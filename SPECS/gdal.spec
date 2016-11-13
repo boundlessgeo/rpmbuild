@@ -102,7 +102,7 @@ tar -xf %{SOURCE1} -C .
 /bin/cp -rf %{_builddir}/%{name}-%{version}/%{mrsid_name}/Raster_DSDK/lib/* /usr/local/lib
 /bin/cp -rf %{_builddir}/%{name}-%{version}/%{mrsid_name}/Raster_DSDK/include/* /usr/local/include
 
-%configure --datadir=/usr/share/gdal --disable-static --with-pg=/usr/pgsql-9.5/bin/pg_config --disable-rpath --with-mrsid=/usr/local  --with-mrsid_lidar=/usr/local --with-spatialite --with-curl --with-expat --with-python --with-java
+%configure --datadir=/usr/share/gdal --disable-static --with-pg=/usr/pgsql-9.6/bin/pg_config --disable-rpath --with-mrsid=/usr/local  --with-mrsid_lidar=/usr/local --with-spatialite --with-curl --with-expat --with-python --with-java
 
 make
 make %{?_smp_mflags}
