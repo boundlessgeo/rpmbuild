@@ -11,7 +11,7 @@ URL: http://www.gdal.org/
 %define _rpmfilename %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm
 %if 0%{?rhel} == 6
 %define mrsid_name MrSID_DSDK-9.5.1.4427-linux.x86-64.gcc44
-%elseif 0%{?rhel} == 7
+%else if 0%{?rhel} == 7
 %define mrsid_name MrSID_DSDK-9.5.1.4427-linux.x86-64.gcc48
 %endif
 
@@ -112,7 +112,7 @@ tar -xf %{SOURCE1} -C .
 
 %if 0%{?rhel} == 6
 %configure --datadir=/usr/share/gdal --disable-static --with-pg=/usr/pgsql-9.6/bin/pg_config --disable-rpath --with-poppler --with-mrsid=/usr/local --with-mrsid_lidar=/usr/local --with-spatialite --with-curl --with-expat --with-python=/usr/local/bin/python2.7 --with-java --with-hdf5 --with-netcdf
-%elseif 0%{?rhel} == 7
+%else if 0%{?rhel} == 7
 %configure --datadir=/usr/share/gdal --disable-static --with-pg=/usr/pgsql-9.6/bin/pg_config --disable-rpath --with-poppler --with-mrsid=/usr/local --with-mrsid_lidar=/usr/local --with-spatialite --with-curl --with-expat --with-python --with-java --with-hdf5 --with-netcdf
 %endif
 
@@ -167,7 +167,7 @@ rm -f /usr/local/lib/{libgeos*,libltidsdk*,libtbb*,liblti_lidar_dsdk*,liblaslib.
 %defattr(-,root,root,-)
 %if 0%{?rhel} == 6
 /usr/local/lib/python2.7
-%elseif 0%{?rhel} == 7
+%else if 0%{?rhel} == 7
 %{python_sitearch}
 %endif
 
