@@ -33,6 +33,8 @@ BuildRequires: ant
 BuildRequires: chrpath
 BuildRequires: libtool
 %{?el6:BuildRequires: swig}
+%{?el6:BuildRequires: python27-devel}
+%{?el7:BuildRequires: python-devel}
 %{?el7:BuildRequires: swig = 1.3.40}
 
 Requires: geos >= 3.3.3
@@ -70,6 +72,8 @@ Requires: %{name} = %{version}-%{release}
 Summary: Python bindings for gdal and ogr
 Group: System Environment/Libraries
 Requires: %{name} = %{version}-%{release}
+%{?el6:Requires: python27}
+%{?el7:Requires: python}
 
 %description devel
 This package contains the header files, static libraries and development
