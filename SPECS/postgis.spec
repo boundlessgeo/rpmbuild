@@ -61,8 +61,7 @@ Requires:       %{name} = %{version} gtk2
 The postgis-gui package provides a graphical shapefile loader and dumper for PostGIS.
 
 %prep
-%setup -q
-
+%setup -q -n postgis-%{version}
 
 %build
 LDFLAGS=-L%{pgdir}/lib

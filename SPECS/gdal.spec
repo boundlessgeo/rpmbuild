@@ -32,6 +32,8 @@ BuildRequires: java-1.8.0-openjdk-devel
 BuildRequires: ant
 BuildRequires: chrpath
 BuildRequires: libtool
+BuildRequires: hdf5-devel
+BuildRequires: netcdf-devel
 %{?el6:BuildRequires: swig}
 %{?el6:BuildRequires: python27-devel}
 %{?el7:BuildRequires: python-devel}
@@ -49,6 +51,8 @@ Requires: sqlite
 Requires: xerces-c
 Requires: libkml
 Requires: openjpeg2
+Requires: hdf5
+Requires: netcdf
 Requires: proj-devel
 
 Patch0: gdal_driverpath.patch
@@ -107,9 +111,9 @@ tar -xf %{SOURCE1} -C .
 /bin/cp -rf %{_builddir}/%{name}-%{version}/%{mrsid_name}/Raster_DSDK/include/* /usr/local/include
 
 %if 0%{?rhel} == 6
-%configure --datadir=/usr/share/gdal --disable-static --with-pg=/usr/pgsql-9.6/bin/pg_config --disable-rpath --with-mrsid=/usr/local  --with-mrsid_lidar=/usr/local --with-spatialite --with-curl --with-expat --with-python=/usr/local/bin/python2.7 --with-java
+%configure --datadir=/usr/share/gdal --disable-static --with-pg=/usr/pgsql-9.6/bin/pg_config --disable-rpath --with-poppler --with-mrsid=/usr/local --with-mrsid_lidar=/usr/local --with-spatialite --with-curl --with-expat --with-python=/usr/local/bin/python2.7 --with-java --with-hdf5 --with-netcdf
 %elseif 0%{?rhel} == 7
-%configure --datadir=/usr/share/gdal --disable-static --with-pg=/usr/pgsql-9.6/bin/pg_config --disable-rpath --with-mrsid=/usr/local  --with-mrsid_lidar=/usr/local --with-spatialite --with-curl --with-expat --with-python --with-java
+%configure --datadir=/usr/share/gdal --disable-static --with-pg=/usr/pgsql-9.6/bin/pg_config --disable-rpath --with-poppler --with-mrsid=/usr/local --with-mrsid_lidar=/usr/local --with-spatialite --with-curl --with-expat --with-python --with-java --with-hdf5 --with-netcdf
 %endif
 
 make
@@ -138,6 +142,12 @@ chrpath -d swig/java/*.so
 cp swig/java/*.so %{buildroot}%{lib_dir}
 cp swig/java/gdal.jar %{buildroot}%{lib_dir}/gdal-%{version}.jar
 
+%if 0%{?rhel} == 6
+mkdir -p %{buildroot}/usr/local/lib
+mv %{buildroot}/usr/lib/python2.7 %{buildroot}/usr/local/lib
+find %{buildroot}%{_bindir} -type f -name '*.py' -exec sed -i 's_bin/env python.*_bin/env python2.7_' {} +
+%endif
+
 %clean
 rm -rf %{buildroot}
 rm -f /usr/local/lib/{libgeos*,libltidsdk*,libtbb*,liblti_lidar_dsdk*,liblaslib.so} && rm -f /usr/local/include/*.h && rm -rf /usr/local/include/{lidar,nitf}
@@ -155,7 +165,12 @@ rm -f /usr/local/lib/{libgeos*,libltidsdk*,libtbb*,liblti_lidar_dsdk*,liblaslib.
 
 %files python
 %defattr(-,root,root,-)
+%if 0%{?rhel} == 6
+/usr/local/lib/python2.7
+%elseif 0%{?rhel} == 7
 %{python_sitearch}
+%endif
+
 %{_bindir}/*.py
 
 %changelog
