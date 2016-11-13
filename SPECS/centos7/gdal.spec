@@ -1,7 +1,7 @@
 Summary: Geospatial Data Abstraction Library
 Name: gdal
-Version: 2.1.0
-Release: 2%{?dist}
+Version: 2.1.2
+Release: 1%{?dist}
 License: MIT/X
 Group: Applications/Engineering
 URL: http://www.gdal.org/
@@ -20,7 +20,7 @@ BuildRequires: expat-devel
 BuildRequires: sqlite-devel
 BuildRequires: libkml-devel
 BuildRequires: openjpeg2-devel
-BuildRequires: postgresql95-devel
+BuildRequires: postgresql96-devel
 BuildRequires: poppler-devel
 BuildRequires: xerces-c-devel
 BuildRequires: java-1.8.0-openjdk-devel
@@ -33,7 +33,7 @@ Requires: geos >= 3.3.3
 Requires: swig = 1.3.40
 Requires: proj
 Requires: poppler
-Requires: postgresql95-libs
+Requires: postgresql96-libs
 Requires: expat
 Requires: curl
 Requires: sqlite
@@ -144,6 +144,8 @@ rm -f /usr/local/lib/{libgeos*,libltidsdk*,libtbb*,liblti_lidar_dsdk*,liblaslib.
 %{_bindir}/*.py
 
 %changelog
+* Sat Nov 12 2016 amirahav <arahav@boundlessgeo.com> [2.1.2-1]
+- Bump to 2.1.2
 * Mon Jul 4 2016 amirahav <arahav@boundlessgeo.com> [2.1.0-2]
 - Add python support
 - require proj-devel because proj is missing libproj.so

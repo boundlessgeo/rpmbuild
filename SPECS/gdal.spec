@@ -1,7 +1,7 @@
 Summary: Geospatial Data Abstraction Library
 Name: gdal
-Version: 2.1.0
-Release: 2%{?dist}
+Version: 2.1.2
+Release: 1%{?dist}
 License: MIT/X
 Group: Applications/Engineering
 URL: http://www.gdal.org/
@@ -9,7 +9,12 @@ URL: http://www.gdal.org/
 %define _unpackaged_files_terminate_build 0
 %define debug_package %{nil}
 %define _rpmfilename %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm
+%if 0%{?rhel} == 6
 %define mrsid_name MrSID_DSDK-9.5.1.4427-linux.x86-64.gcc44
+%elseif 0%{?rhel} == 7
+%define mrsid_name MrSID_DSDK-9.5.1.4427-linux.x86-64.gcc48
+%endif
+
 Source0: http://download.osgeo.org/gdal/gdal-%{version}.tar.gz
 Source1: %{mrsid_name}.tar.gz
 BuildRequires: gcc
@@ -20,20 +25,22 @@ BuildRequires: expat-devel
 BuildRequires: sqlite-devel
 BuildRequires: libkml-devel
 BuildRequires: openjpeg2-devel
-BuildRequires: postgresql95-devel
+BuildRequires: postgresql96-devel
 BuildRequires: poppler-devel
 BuildRequires: xerces-c-devel
 BuildRequires: java-1.8.0-openjdk-devel
 BuildRequires: ant
 BuildRequires: chrpath
 BuildRequires: libtool
-BuildRequires: swig
+%{?el6:BuildRequires: swig}
+%{?el7:BuildRequires: swig = 1.3.40}
 
 Requires: geos >= 3.3.3
-Requires: swig
+%{?el6:Requires: swig}
+%{?el7:Requires: swig = 1.3.40}
 Requires: proj
 Requires: poppler
-Requires: postgresql95-libs
+Requires: postgresql96-libs
 Requires: expat
 Requires: curl
 Requires: sqlite
@@ -144,6 +151,8 @@ rm -f /usr/local/lib/{libgeos*,libltidsdk*,libtbb*,liblti_lidar_dsdk*,liblaslib.
 %{_bindir}/*.py
 
 %changelog
+* Sat Nov 12 2016 amirahav <arahav@boundlessgeo.com> [2.1.2-1]
+- Bump to 2.1.2 and Postgres 9.6
 * Tue Jul 5 2016 amirahav <arahav@boundlessgeo.com> [2.1.0-2]
 - Add python support
 - require proj-devel because proj is missing libproj.so
